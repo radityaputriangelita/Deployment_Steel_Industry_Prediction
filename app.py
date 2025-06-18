@@ -172,36 +172,25 @@ elif page == "Predict Load Type":
 
         if label == 0:
             result = "Light Load"
-            bg_color = "#DFF5E1"  # hijau muda
-            text_color = "#000000"
-        elif label == 1:
-            result = "Maximum Load"
-            bg_color = "#FFE2CC"  # oranye muda
-            text_color = "#000000"
+            color = "green"
+            advice = "✅ Kondisi energi masih aman, Anda dapat melanjutkan kegiatan seperti biasa."
         elif label == 2:
             result = "Medium Load"
-            bg_color = "#FFF7D1"  # kuning muda
-            text_color = "#000000"
+            color = "orange"
+            advice = "⚠️ Perhatikan penggunaan energi, Lakukan pemantauan agar tidak meningkat ke level maksimum."
+        elif label == 1:
+            result = "Maximum Load"
+            color = "red"
+            advice = "🚨 Kurangi penggunaan energi segera untuk menghindari pemborosan dan potensi kerusakan sistem."
         else:
             result = "Unknown"
-            bg_color = "#eeeeee"
-            text_color = "#000000"
+            color = "gray"
+            advice = "Data tidak dikenali. Silakan cek kembali input."
 
         st.markdown(
-            f"""
-            <div style="
-                background-color: {bg_color};
-                padding: 0.5rem;
-                border-radius: 10px;
-                margin-top: 0.5rem;
-                color: {text_color};
-                font-size: 1rem;
-                font-weight: bold;
-                text-align: center;
-            ">
-                Prediksi Load Type: {result}
-            </div>
-            """,
+            f"<div style='padding: 10px; background-color: #{'d4edda' if color=='green' else 'fff3cd' if color=='orange' else 'f8d7da'}; border-left: 5px solid {color}; border-radius: 5px;'>"
+            f"<h5 style='color: {color};'>Prediksi Load Type: {result}</h5>"
+            f"<p style= 'color: black'>{advice}</p>"
+            "</div>",
             unsafe_allow_html=True
         )
-
