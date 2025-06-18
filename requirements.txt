@@ -1,7 +1,10 @@
 pandas
 numpy
 scikit-learn
-joblib
-streamlit
 imbalanced-learn
 matplotlib
+
+
+joblib
+streamlit
+streamlit-option-menu
