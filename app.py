@@ -137,27 +137,23 @@ elif page == "Predict Load Type":
     )
 
     # Input data
-    col1, col2 = st.columns(2)
-
-    with col1:
-        usage_kwh = st.number_input("Usage (kWh)", min_value=0.0)
-        lagging_kvarh = st.number_input("Lagging kVarh", min_value=0.0)
-        leading_kvarh = st.number_input("Leading kVarh", min_value=0.0)
-        co2 = st.number_input("CO2 (tCO2)", min_value=0.0)
-
-    with col2:
-        lagging_pf = st.number_input("Lagging Power Factor", min_value=0.0)
-        leading_pf = st.number_input("Leading Power Factor", min_value=0.0)
-        selected_date = st.date_input("Pilih Tanggal", value=datetime.date.today())
-        selected_time = st.time_input("Pilih Waktu", value=datetime.time(0, 0, 0))
+    usage_kwh = st.number_input("Usage (kWh)", min_value=0.0)
+    lagging_pf = st.number_input("Lagging Power Factor", min_value=0.0)
+    selected_date = st.date_input("Pilih Tanggal", value=datetime.date.today())
+    selected_time = st.time_input("Pilih Waktu", value=datetime.time(0, 0, 0))
 
     # Hitung fitur waktu
     nsm = selected_time.hour * 3600 + selected_time.minute * 60 + selected_time.second
     day_of_week_idx = selected_date.weekday()
     week_status_flag = 1 if day_of_week_idx < 5 else 0
 
+    lagging_kvarh = 0
+    leading_kvarh = 0
+    co2 = 0
+    leading_pf = 0
+
     input_data = pd.DataFrame([[
-        usage_kwh, lagging_kvarh, leading_kvarh, co2,
+        usage_kwh, lagging_kvarh , leading_kvarh, co2,
         lagging_pf, leading_pf, nsm,
         week_status_flag, day_of_week_idx
     ]], columns=[
